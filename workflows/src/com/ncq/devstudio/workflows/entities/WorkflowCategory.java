@@ -1,5 +1,7 @@
 package com.ncq.devstudio.workflows.entities;
 
+import com.ncq.devstudio.workflows.beans.NcqCategory;
+import com.ncq.devstudio.workflows.beans.NcqWorkflow;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
@@ -166,7 +168,5 @@ public class WorkflowCategory implements Serializable {
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
- 
-    
     
 }

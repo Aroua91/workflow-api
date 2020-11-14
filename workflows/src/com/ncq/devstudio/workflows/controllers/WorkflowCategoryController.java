@@ -5,7 +5,11 @@ import com.ncq.devstudio.workflows.beans.Response;
 import com.ncq.devstudio.workflows.conf.ServerConfig;
 import com.ncq.devstudio.workflows.entities.WorkflowCategory;
 import com.ncq.devstudio.workflows.services.WorkflowCategoryService;
+
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Level;
 import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
@@ -43,14 +47,31 @@ public class WorkflowCategoryController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @Transactional
-    public ResponseEntity<Response<NcqCategory>> createTransaction(
+    public ResponseEntity<Response<NcqCategory>> createWorkflow(
             String email, @RequestBody(required = true) NcqCategory ncqCategory) throws IOException {
 
         LOGGER.info("Adding new category;");
         WorkflowCategory category = categorySrv.addNewCategory(ncqCategory);
         LOGGER.info("Category added successfully!");
-        
+
         Response<NcqCategory> r = new Response();
+        r.setObject(categorySrv.toNcqCategory(category));
         return ResponseEntity.status(HttpStatus.OK).body(r);
     }
+
+    @RequestMapping(value = "/all",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Response<List<NcqCategory>>> getAllCategories() {
+        LOGGER.info("Getting all categories ...");
+
+        Response r = new Response();
+        try {
+            r.setObject(categorySrv.getAllCategories());
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(WorkflowCategoryController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(r);
+    }
+
 }
