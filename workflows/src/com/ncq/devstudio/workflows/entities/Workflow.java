@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -22,7 +23,7 @@ import javax.validation.constraints.Size;
  * @author Aroua Souabni
  */
 @Entity
-@Table(name = "ncq-workflow")
+@Table(name = "ncq_workflow")
 public class Workflow implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,6 +32,12 @@ public class Workflow implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_workflow")
     private Integer id;
+
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "uuid", unique = true)
+    private String uuid;
 
     @Basic(optional = true)
     @Size(min = 1, max = 255)
@@ -45,26 +52,29 @@ public class Workflow implements Serializable {
     @Column(name = "enabled")
     private int enabled;
 
-    @ManyToMany(mappedBy = "workflowVariants", cascade = CascadeType.ALL)
-    @JoinTable(name = "workflow-variants",
-            joinColumns = {
-                @JoinColumn(name = "id_principal")},
-            inverseJoinColumns = {
-                @JoinColumn(name = "id_workflow")})
-    private Set<Workflow> principalWorkflows = new HashSet();
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "workflow-variants",
+        @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "workflow_variants",
             joinColumns = {
                 @JoinColumn(name = "id_variant")},
             inverseJoinColumns = {
                 @JoinColumn(name = "id_workflow")})
     private Set<Workflow> workflowVariants = new HashSet();
     
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "workflow_variants",
+            joinColumns = {
+                @JoinColumn(name = "id_workflow")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "id_variant")})
+    private Set<Workflow> principalWorkflows = new HashSet();
+
+
     @ManyToMany
     @JoinTable(name = "workflow_category_join",
-           joinColumns = { @JoinColumn(name = "id_workflow" ) },
-           inverseJoinColumns = { @JoinColumn(name = "id_category") })
+            joinColumns = {
+                @JoinColumn(name = "id_workflow")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "id_category")})
     private Set<WorkflowCategory> categories = new HashSet();
 
     public Integer getId() {
@@ -122,7 +132,5 @@ public class Workflow implements Serializable {
     public void setCategories(Set<WorkflowCategory> categories) {
         this.categories = categories;
     }
-    
-    
- 
+
 }

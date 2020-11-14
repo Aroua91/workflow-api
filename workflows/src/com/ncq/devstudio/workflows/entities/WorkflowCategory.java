@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -25,7 +26,7 @@ import javax.validation.constraints.Size;
  * @author Aroua Souabni
  */
 @Entity
-@Table(name = "ncq-workflow-category")
+@Table(name = "ncq_workflow_category")
 public class WorkflowCategory implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,6 +35,12 @@ public class WorkflowCategory implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_category")
     private Integer id;
+    
+        @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "uuid", unique = true)
+    private String uuid;
 
     @Basic(optional = true)
     @Size(min = 1, max = 255)
@@ -150,6 +157,14 @@ public class WorkflowCategory implements Serializable {
 
     public void setWorkflows(Set<Workflow> workflows) {
         this.workflows = workflows;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
  
     

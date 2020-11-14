@@ -13,5 +13,6 @@ public interface WorkflowCategoryRepository extends
         PagingAndSortingRepository<WorkflowCategory, Integer> 
 , JpaRepository<WorkflowCategory, Integer> {
 
+    public WorkflowCategory findByUuid(String uuid);
 
 }
