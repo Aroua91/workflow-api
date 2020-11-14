@@ -14,4 +14,5 @@ import org.springframework.stereotype.Repository;
 public interface WorkflowRepository extends
         PagingAndSortingRepository<Workflow, Integer>, JpaRepository<Workflow, Integer> {
 
+    public Workflow findByUuid(String uuid);
 }

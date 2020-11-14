@@ -1,16 +1,13 @@
 package com.ncq.devstudio.workflows.controllers;
 
 import com.ncq.devstudio.workflows.beans.NcqCategory;
+import com.ncq.devstudio.workflows.beans.NcqWorkflow;
 import com.ncq.devstudio.workflows.beans.Response;
 import com.ncq.devstudio.workflows.conf.ServerConfig;
-import com.ncq.devstudio.workflows.entities.WorkflowCategory;
-import com.ncq.devstudio.workflows.services.WorkflowCategoryService;
-
+import com.ncq.devstudio.workflows.entities.Workflow;
+import com.ncq.devstudio.workflows.services.WorkflowService;
 import java.io.IOException;
-import java.util.List;
-import java.util.logging.Level;
 import javax.transaction.Transactional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,48 +25,33 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Aroua Souabni
  */
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/workflow")
 @EnableConfigurationProperties(ServerConfig.class)
-public class WorkflowCategoryController {
-
+public class WorkflowController {
+    
     private static final Logger LOGGER = LoggerFactory.getLogger(
-            WorkflowCategoryController.class);
+            WorkflowController.class);
 
-    private final WorkflowCategoryService categorySrv;
+    private final WorkflowService workflowSrv;
 
     @Autowired
-    public WorkflowCategoryController(WorkflowCategoryService categorySrv) {
-        this.categorySrv = categorySrv;
+    public WorkflowController(WorkflowService workflowSrv) {
+        this.workflowSrv = workflowSrv;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @Transactional
-    public ResponseEntity<Response<NcqCategory>> createCategory(@RequestBody(required = true) NcqCategory ncqCategory) throws IOException {
+    public ResponseEntity<Response<NcqWorkflow>> createWorkflow(
+        @RequestBody(required = true) NcqWorkflow ncqWorkflow) throws IOException {
 
         LOGGER.info("Adding new category;");
-        WorkflowCategory category = categorySrv.addNewCategory(ncqCategory);
+        Workflow workflow = workflowSrv.addNewWorkflow(ncqWorkflow);
         LOGGER.info("Category added successfully!");
 
-        Response<NcqCategory> r = new Response();
-        r.setObject(categorySrv.toNcqCategory(category));
+        Response<NcqWorkflow> r = new Response();
+        r.setObject(workflowSrv.toNcqWorkflow(workflow));
         return ResponseEntity.status(HttpStatus.OK).body(r);
     }
-
-    @RequestMapping(value = "/all",
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Response<List<NcqCategory>>> getAllCategories() {
-        LOGGER.info("Getting all categories ...");
-
-        Response r = new Response();
-        try {
-            r.setObject(categorySrv.getAllCategories());
-        } catch (IOException ex) {
-            java.util.logging.Logger.getLogger(WorkflowCategoryController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(r);
-    }
-
 }

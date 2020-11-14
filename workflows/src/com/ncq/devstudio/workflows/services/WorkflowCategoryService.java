@@ -1,7 +1,6 @@
 package com.ncq.devstudio.workflows.services;
 
 import com.ncq.devstudio.workflows.beans.NcqCategory;
-import com.ncq.devstudio.workflows.beans.NcqWorkflow;
 import com.ncq.devstudio.workflows.conf.ServerConfig;
 import com.ncq.devstudio.workflows.entities.WorkflowCategory;
 import com.ncq.devstudio.workflows.repositories.WorkflowCategoryRepository;
@@ -53,7 +52,7 @@ public class WorkflowCategoryService {
         return category;
     }
 
-    public NcqCategory toNcqCategory(WorkflowCategory category) throws IOException {
+    public static NcqCategory toNcqCategory(WorkflowCategory category) throws IOException {
         NcqCategory ncqCategory = new NcqCategory();
         ncqCategory.setCreationDate(category.getCreationDate());
         ncqCategory.setName(category.getName());
@@ -78,5 +77,8 @@ public class WorkflowCategoryService {
         }
         return ncqCategories;
     }
-
+    
+    public WorkflowCategory getCategoryByUuid(String uuid) {
+        return categoryRepo.findByUuid(uuid);
+    }
 }

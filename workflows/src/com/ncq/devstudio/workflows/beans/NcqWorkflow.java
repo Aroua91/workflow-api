@@ -4,9 +4,11 @@ import java.util.List;
 
 /**
  *
- * @author aroua
+ * @author Aroua Souabni
  */
 public class NcqWorkflow {
+    
+    private String uuid;
 
     private String name;
 
@@ -14,11 +16,12 @@ public class NcqWorkflow {
 
     private int enabled;
 
-    private List<NcqWorkflow> principalWorkflows;
+    private List<String> principalWorkflows;
 
-    private List<NcqWorkflow> workflowVariants;
+    private List<String> workflowVariants;
     
     private List<NcqCategory> categories;
+
 
     public String getName() {
         return name;
@@ -44,22 +47,22 @@ public class NcqWorkflow {
         this.enabled = enabled;
     }
 
-    public List<NcqWorkflow> getPrincipalWorkflows() {
+    public List<String> getPrincipalWorkflows() {
         return principalWorkflows;
     }
 
-    public void setPrincipalWorkflows(List<NcqWorkflow> principalWorkflows) {
+    public void setPrincipalWorkflows(List<String> principalWorkflows) {
         this.principalWorkflows = principalWorkflows;
     }
 
-    public List<NcqWorkflow> getWorkflowVariants() {
+    public List<String> getWorkflowVariants() {
         return workflowVariants;
     }
 
-    public void setWorkflowVariants(List<NcqWorkflow> workflowVariants) {
+    public void setWorkflowVariants(List<String> workflowVariants) {
         this.workflowVariants = workflowVariants;
     }
-
+    
     public List<NcqCategory> getCategories() {
         return categories;
     }
@@ -67,6 +70,13 @@ public class NcqWorkflow {
     public void setCategories(List<NcqCategory> categories) {
         this.categories = categories;
     }
-    
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
     
 }
