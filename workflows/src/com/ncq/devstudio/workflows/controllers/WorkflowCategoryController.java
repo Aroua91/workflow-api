@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Aroua Souabni
  */
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/wfapi/v1/category")
 @EnableConfigurationProperties(ServerConfig.class)
 public class WorkflowCategoryController {
 

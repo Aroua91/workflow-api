@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Aroua Souabni
  */
 @RestController
-@RequestMapping("/workflow")
+@RequestMapping("/wfapi/v1/workflow")
 @EnableConfigurationProperties(ServerConfig.class)
 public class WorkflowController {
 

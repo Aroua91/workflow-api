@@ -49,6 +49,13 @@
             <artifactId>jcl-over-slf4j</artifactId>
             <version>${jcloverslf4j.version}</version>
         </dependency>
+        <!-- Test deps -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <reporting>
