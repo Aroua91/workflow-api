@@ -55,17 +55,17 @@ public class Workflow implements Serializable {
         @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "workflow_variants",
             joinColumns = {
-                @JoinColumn(name = "id_variant")},
+                @JoinColumn(name = "id_workflow")},
             inverseJoinColumns = {
-                @JoinColumn(name = "id_workflow")})
+                @JoinColumn(name = "id_variant")})
     private Set<Workflow> workflowVariants = new HashSet();
     
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "workflow_variants",
             joinColumns = {
-                @JoinColumn(name = "id_workflow")},
+                @JoinColumn(name = "id_variant")},
             inverseJoinColumns = {
-                @JoinColumn(name = "id_variant")})
+                @JoinColumn(name = "id_workflow")})
     private Set<Workflow> principalWorkflows = new HashSet();
 
 

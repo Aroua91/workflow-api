@@ -5,6 +5,7 @@ import com.ncq.devstudio.workflows.beans.NcqWorkflow;
 import com.ncq.devstudio.workflows.entities.Workflow;
 import com.ncq.devstudio.workflows.entities.WorkflowCategory;
 import com.ncq.devstudio.workflows.repositories.WorkflowRepository;
+import com.ncq.devstudio.workflows.specifications.WorkflowSpecification;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,6 +15,9 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -49,7 +53,6 @@ public class WorkflowService {
                 WorkflowCategory category = categorySrv.getCategoryByUuid(ncqCategory.getUuid());
                 categories.add(category);
             }
-            System.out.println("**** " + categories.size());
             workflow.setCategories((Set<WorkflowCategory>) categories);
         }
 
@@ -105,6 +108,36 @@ public class WorkflowService {
         }
 
         return ncqWorkflow;
+    }
+
+    /**
+     * Returns a Page of {@link Workflow} meeting the paging restriction
+     * provided in the parameters.
+     *
+     * @param page the page index
+     * @param size the page size
+     * @return a page of {@link Workflow} as specified in the parameters.
+     */
+    public List<Workflow> findPage(int page, int size) {
+        Page<Workflow> wfPage = workflowRepo.findAll(
+                PageRequest.of(page, size));
+        return wfPage.getContent();
+    }
+
+    /**
+     * Get workflows count.
+     *
+     * @return workflows number
+     */
+    public long getWorkflowsCount() {
+        return workflowRepo.count();
+    }
+
+    public List<Workflow> filter(Integer page, Integer pageSize, String name, int enabled, String[] category) {
+        WorkflowSpecification workflowSpecification = new WorkflowSpecification(name, enabled, category);
+        Pageable pageable = PageRequest.of(page, pageSize);
+        List<Workflow> workflows = workflowRepo.findAll(workflowSpecification, pageable).getContent();
+        return workflows;
     }
 
 }
