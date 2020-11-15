@@ -10,4 +10,23 @@
     <artifactId>workflow-beans</artifactId>
     <name>Workflow beans library</name>
     <packaging>jar</packaging>
+        <build>
+        <directory>target</directory>
+        <outputDirectory>target/classes</outputDirectory>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+        <testOutputDirectory>target/test-classes</testOutputDirectory>
+        <sourceDirectory>src/</sourceDirectory>
+        <scriptSourceDirectory>src/main/scripts</scriptSourceDirectory>
+        <testSourceDirectory>test/</testSourceDirectory>
+        <resources>
+            <resource>
+                <directory>resources</directory>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <directory>testdata/</directory>
+            </testResource>
+        </testResources>
+    </build>
 </project>

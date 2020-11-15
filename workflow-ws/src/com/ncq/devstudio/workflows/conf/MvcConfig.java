@@ -23,7 +23,7 @@ public class MvcConfig {
      * <ul>
      * <li>allowed origin: any</li>
      * <li>allowed headers: any</li>
-     * <li>allowed methods: POST</li>
+     * <li>allowed methods: any</li>
      * </ul>
      *
      * @return CORS filter

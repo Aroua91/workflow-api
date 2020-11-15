@@ -5,10 +5,10 @@ import com.ncq.devstudio.workflows.beans.NcqCategory;
 import com.ncq.devstudio.workflows.beans.NcqWorkflow;
 import com.ncq.devstudio.workflows.beans.Response;
 import com.ncq.devstudio.workflows.beans.WorkflowsRequest;
+
 import java.util.ArrayList;
 import java.util.List;
-import javax.validation.constraints.AssertFalse;
-import javax.validation.constraints.AssertTrue;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
