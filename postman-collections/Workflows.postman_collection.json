@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "9cd025d0-e639-4444-84a5-6937dc046758",
+		"name": "Workflows",
+		"description": "Workflows related WS tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add new workflow",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"new workflow\", \"description\":\"some description\", \"enabled\": 5, \"categories\":[{\"uuid\":\"c453c110-77e4-41a6-9c5a-34774e91e1e2\"}]}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9011/workflow/add",
+					"host": [
+						"localhost"
+					],
+					"port": "9011",
+					"path": [
+						"workflow",
+						"add"
+					]
+				},
+				"description": "Add a new workflow"
+			},
+			"response": []
+		},
+		{
+			"name": "Add workflow with a principal one",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gets workflows count",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "call ws to get total workflows count"
+			},
+			"response": []
+		},
+		{
+			"name": "Get workflows page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Get workflows page content"
+			},
+			"response": []
+		},
+		{
+			"name": "Filter workflows",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Filter workflows by name, by status and by categories"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
